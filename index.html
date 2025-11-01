@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tano's Automotive - Expert Auto Repair in Tulsa, OK</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-red: #c8403d;
+            --dark-gray: #2c2c2c;
+            --medium-gray: #4a4a4a;
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+            --border-gray: #dddddd;
+        }
+
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        /* Top Contact Bar */
+        .top-bar {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .top-bar a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .top-bar a:hover {
+            color: var(--primary-red);
+        }
+
+        /* Hero Section - Full Screen */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--dark-gray) 0%, var(--medium-gray) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 20px;
+            margin-top: 48px;
+            position: relative;
+        }
+
+        .hero-logo {
+            max-width: 90%;
+            width: 600px;
+            height: auto;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        .hero-fallback {
+            background-color: var(--primary-red);
+            padding: 80px 40px;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-red);
+            color: var(--white);
+            padding: 15px 40px;
+            font-size: 1.2em;
+            text-decoration: none;
+            border: 2px solid var(--white);
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .cta-button:hover {
+            background-color: var(--white);
+            color: var(--primary-red);
+            border-color: var(--primary-red);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--white);
+            font-size: 14px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            color: var(--dark-gray);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-red);
+        }
+
+        /* About Section */
+        #about {
+            background-color: var(--light-gray);
+        }
+
+        .about-content {
+            text-align: center;
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: var(--medium-gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background-color: var(--white);
+            padding: 30px;
+            border: 2px solid var(--border-gray);
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .service-card:hover {
+            border-color: var(--primary-red);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .service-card h3 {
+            color: var(--primary-red);
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .service-card p {
+            color: var(--medium-gray);
+        }
+
+        /* Reviews Section */
+        #reviews {
+            background-color: var(--light-gray);
+        }
+
+        .reviews-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .review-card {
+            background-color: var(--white);
+            padding: 25px;
+            border: 2px solid var(--border-gray);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .review-name {
+            font-weight: bold;
+            color: var(--dark-gray);
+            font-size: 1.1em;
+        }
+
+        .stars {
+            color: #ffa500;
+            font-size: 1.2em;
+        }
+
+        .review-body {
+            color: var(--medium-gray);
+            line-height: 1.6;
+        }
+
+        .show-more-btn {
+            display: block;
+            margin: 40px auto 0;
+            padding: 12px 40px;
+            background-color: var(--primary-red);
+            color: var(--white);
+            border: none;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .show-more-btn:hover {
+            background-color: var(--dark-gray);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Hours Section */
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hours-item {
+            background-color: var(--white);
+            padding: 15px;
+            border: 2px solid var(--border-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hours-day {
+            font-weight: bold;
+            color: var(--dark-gray);
+        }
+
+        .hours-time {
+            color: var(--medium-gray);
+        }
+
+        /* Location Section */
+        #location {
+            background-color: var(--light-gray);
+        }
+
+        .location-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .location-info {
+            background-color: var(--white);
+            padding: 40px;
+            border: 2px solid var(--border-gray);
+        }
+
+        .location-info h3 {
+            color: var(--primary-red);
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .location-info p {
+            margin-bottom: 15px;
+            color: var(--medium-gray);
+            font-size: 1.1em;
+        }
+
+        .location-info a {
+            color: var(--primary-red);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .location-info a:hover {
+            text-decoration: underline;
+        }
+
+        .map-container {
+            border: 2px solid var(--border-gray);
+            overflow: hidden;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 450px;
+            border: 0;
+        }
+
+        /* Contact Form Section */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--white);
+            padding: 40px;
+            border: 2px solid var(--border-gray);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark-gray);
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-gray);
+            font-size: 1em;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-red);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-red);
+            color: var(--white);
+            border: none;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--dark-gray);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Square Payment Section */
+        #square-payment {
+            background-color: var(--light-gray);
+        }
+
+        .square-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--white);
+            padding: 40px;
+            border: 2px solid var(--border-gray);
+            text-align: center;
+        }
+
+        .square-container p {
+            margin-bottom: 20px;
+            color: var(--medium-gray);
+            font-size: 1.1em;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-red);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1.2em;
+            }
+
+            .location-content {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .reviews-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hours-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .top-bar {
+                font-size: 16px;
+            }
+        }
+
+        /* Loading state for image */
+        .hero-logo-loading {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Contact Bar -->
+    <div class="top-bar">
+        <a href="tel:+19187648515">Call Now: (918) 764-8515</a>
+    </div>
+
+    <!-- Hero Section - Full Screen -->
+    <section class="hero">
+        <img src="Tanos-Automotive.png" alt="Tano's Automotive" class="hero-logo" id="heroLogo" onerror="this.style.display='none'; document.getElementById('heroFallback').style.display='block';">
+        <div id="heroFallback" class="hero-fallback" style="display: none;">
+            <h1>Tano's Automotive</h1>
+            <p>Expert Auto Repair & Service in Tulsa</p>
+        </div>
+        <a href="#contact" class="cta-button">Schedule Service Today</a>
+        <div class="scroll-indicator">▼ Scroll Down ▼</div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Tano's Automotive</h2>
+            <div class="about-content">
+                <p>Welcome to Tano's Automotive, your trusted auto repair shop in Tulsa, Oklahoma. Under the expert leadership of owner Juan, we provide professional, reliable automotive services with a commitment to quality and customer satisfaction. Our experienced team treats every vehicle with the care and precision it deserves.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Engine Diagnostics</h3>
+                    <p>Advanced diagnostic equipment to identify and resolve engine issues quickly and accurately.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Brake Service</h3>
+                    <p>Complete brake system inspection, repair, and replacement for your safety.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Oil Changes</h3>
+                    <p>Regular maintenance to keep your engine running smoothly and efficiently.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Transmission Repair</h3>
+                    <p>Expert transmission diagnostics and repairs to keep your vehicle shifting smoothly.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Electrical Systems</h3>
+                    <p>Comprehensive electrical system diagnostics and repairs for all vehicle makes and models.</p>
+                </div>
+                <div class="service-card">
+                    <h3>General Maintenance</h3>
+                    <p>Routine maintenance services to extend the life of your vehicle and prevent costly repairs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews">
+        <div class="container">
+            <h2 class="section-title">Customer Reviews</h2>
+            <div class="reviews-container" id="reviewsContainer">
+                <!-- Reviews will be generated by JavaScript -->
+            </div>
+            <button class="show-more-btn hidden" id="showMoreBtn">Show More Reviews</button>
+        </div>
+    </section>
+
+    <!-- Hours Section -->
+    <section id="hours">
+        <div class="container">
+            <h2 class="section-title">Business Hours</h2>
+            <div class="hours-grid">
+                <div class="hours-item">
+                    <span class="hours-day">Monday</span>
+                    <span class="hours-time">9 AM – 5 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span class="hours-day">Tuesday</span>
+                    <span class="hours-time">9 AM – 5 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span class="hours-day">Wednesday</span>
+                    <span class="hours-time">9 AM – 5 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span class="hours-day">Thursday</span>
+                    <span class="hours-time">9 AM – 5 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span class="hours-day">Friday</span>
+                    <span class="hours-time">9 AM – 5 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span class="hours-day">Saturday</span>
+                    <span class="hours-time">12 PM – 4 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span class="hours-day">Sunday</span>
+                    <span class="hours-time">Closed</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location">
+        <div class="container">
+            <h2 class="section-title">Visit Us</h2>
+            <div class="location-content">
+                <div class="location-info">
+                    <h3>Location</h3>
+                    <p>4601 E Pine St<br>Tulsa, OK 74115</p>
+                    <h3>Phone</h3>
+                    <p><a href="tel:+19187648515">(918) 764-8515</a></p>
+                    <h3>Find Us On</h3>
+                    <p><a href="https://www.google.com/maps/place/Tano's+Automotive/@36.1777025,-95.9258553,17z/data=!4m15!1m8!3m7!1s0x87b6ed8a6fd90d29:0x104c53d60a091ac0!2sTano's+Automotive!8m2!3d36.1776476!4d-95.9258886!10e5!16s%2Fg%2F11nmrsxgp1!3m5!1s0x87b6ed8a6fd90d29:0x104c53d60a091ac0!8m2!3d36.1776476!4d-95.9258886!16s%2Fg%2F11nmrsxgp1?entry=ttu&g_ep=EgoyMDI1MTAyOS4yIKXMDSoASAFQAw%3D%3D" target="_blank">Google Maps</a></p>
+                </div>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3220.541824888415!2d-95.92585530000001!3d36.177702499999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87b6ed8a6fd90d29%3A0x104c53d60a091ac0!2sTano&#39;s%20Automotive!5e0!3m2!1sen!2sus!4v1762036966270!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Square Payment Section -->
+    <section id="square-payment">
+        <div class="container">
+            <h2 class="section-title">Pay Online</h2>
+            <div class="square-container">
+                <p>We accept online payments through Square for your convenience.</p>
+                <!-- REPLACE 'YOUR_LOCATION_ID' BELOW WITH YOUR ACTUAL SQUARE LOCATION ID -->
+                <div id="square-payment-form">
+                    <p style="color: var(--primary-red); font-weight: bold;">Square Payment Integration:</p>
+                    <p>Replace 'YOUR_LOCATION_ID' in the JavaScript code below with your actual Square location ID to enable online payments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h3>Tano's Automotive</h3>
+            <p>Expert Auto Repair in Tulsa, Oklahoma</p>
+            <div class="footer-links">
+                <a href="tel:+19187648515">Call: (918) 764-8515</a>
+                <a href="https://www.google.com/maps/place/Tano's+Automotive/@36.1777025,-95.9258553,17z/data=!4m15!1m8!3m7!1s0x87b6ed8a6fd90d29:0x104c53d60a091ac0!2sTano's+Automotive!8m2!3d36.1776476!4d-95.9258886!10e5!16s%2Fg%2F11nmrsxgp1!3m5!1s0x87b6ed8a6fd90d29:0x104c53d60a091ac0!8m2!3d36.1776476!4d-95.9258886!16s%2Fg%2F11nmrsxgp1?entry=ttu&g_ep=EgoyMDI1MTAyOS4yIKXMDSoASAFQAw%3D%3D" target="_blank">Google Business</a>
+                <a href="https://github.com/JamesBrownR/Tano-s-Automotive/new/main" target="_blank">GitHub</a>
+            </div>
+            <p style="margin-top: 20px;">&copy; 2024 Tano's Automotive. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Reviews Array - Add your reviews here
+        const reviews = [
+            { name: "Customer 1", rating: 5, body: "" },
+            { name: "Customer 2", rating: 5, body: "" },
+            { name: "Customer 3", rating: 5, body: "" },
+            { name: "Customer 4", rating: 5, body: "" },
+            { name: "Customer 5", rating: 5, body: "" },
+            { name: "Customer 6", rating: 5, body: "" }
+        ];
+
+        // Reviews Display Logic
+        const reviewsPerPage = 6;
+        let currentReviewIndex = 0;
+
+        function renderReviews() {
+            const container = document.getElementById('reviewsContainer');
+            const showMoreBtn = document.getElementById('showMoreBtn');
+            
+            const endIndex = Math.min(currentReviewIndex + reviewsPerPage, reviews.length);
+            
+            for (let i = currentReviewIndex; i < endIndex; i++) {
+                const review = reviews[i];
+                const reviewCard = document.createElement('div');
+                reviewCard.className = 'review-card';
+                reviewCard.innerHTML = `
+                    <div class="review-header">
+                        <span class="review-name">${review.name}</span>
+                        <span class="stars">${'★'.repeat(review.rating)}</span>
+                    </div>
+                    ${review.body ? `<div class="review-body">${review.body}</div>` : ''}
+                `;
+                container.appendChild(reviewCard);
+            }
+            
+            currentReviewIndex = endIndex;
+            
+            if (currentReviewIndex < reviews.length) {
+                showMoreBtn.classList.remove('hidden');
+                const remaining = reviews.length - currentReviewIndex;
+                showMoreBtn.textContent = `Show ${remaining} More ${remaining === 1 ? 'Review' : 'Reviews'} (Total ${reviews.length})`;
+            } else {
+                showMoreBtn.classList.add('hidden');
+            }
+        }
+
+        document.getElementById('showMoreBtn').addEventListener('click', renderReviews);
+
+        // Initial render
+        renderReviews();
+
+        // Contact Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                message: document.getElementById('message').value
+            };
+
+            // Create mailto link
+            const subject = encodeURIComponent('Website Contact Form - ' + formData.name);
+            const body = encodeURIComponent(
+                'Name: ' + formData.name + '\n' +
+                'Email: ' + formData.email + '\n' +
+                'Phone: ' + formData.phone + '\n\n' +
+                'Message:\n' + formData.message
+            );
+            
+            // Replace with your email address
+            window.location.href = `mailto:your-email@example.com?subject=${subject}&body=${body}`;
+            
+            alert('Thank you for your message! Your email client will open to send the message.');
+            this.reset();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Square Payment Integration
+        // REPLACE 'YOUR_LOCATION_ID' BELOW WITH YOUR ACTUAL SQUARE LOCATION ID
+        const SQUARE_LOCATION_ID = 'YOUR_LOCATION_ID';
+        
+        // Uncomment and configure when you have your Square credentials:
+        /*
+        async function initializeSquare() {
+            const payments = Square.payments(SQUARE_APPLICATION_ID, SQUARE_LOCATION_ID);
+            const card = await payments.card();
+            await card.attach('#square-payment-form');
+        }
+        
+        if (SQUARE_LOCATION_ID !== 'YOUR_LOCATION_ID') {
+            initializeSquare();
+        }
+        */
+    </script>
+</body>
+</html>
